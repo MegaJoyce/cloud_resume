@@ -22,7 +22,7 @@ jobs:
   - task: AzureFileCopy@6
     inputs:
       SourcePath: '$(System.DefaultWorkingDirectory)'
-      azureSubscription: '43e47db3-18b4-4a8d-b9a7-565d9a07e57e'
-      storage: $(STORAGEACCOUNT)
+      azureSubscription: 'joyceheyueoutlook - sub(43e47db3-18b4-4a8d-b9a7-565d9a07e57e)'
       Destination: 'AzureBlob'
-      ContainerName: $(CONTAINER)
+      storage: '$(STORAGEACCOUNT)'
+      ContainerName: '$(CONTAINER)'
