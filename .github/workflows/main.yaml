@@ -1,22 +1,31 @@
 name: cloud resume deployment 
 
-on: [push]
+on:
+    push:
+        branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v3
+    - uses: azure/login@v1
       with:
-        dotnet-version: '3.0.100'
-    - name: Copy source code to container
-      uses: lauchacarro/Azure-Storage-Action@master
-      with: 
-        enabled-static-website: 'true'
-        folder: '/web'
-        index-document: 'index.html'
-        error-document: '' # For Angular apps with routing enabled, this must point to the index.html file because the requested routes don't exist phyiscally and blob storage would throw a 404.
-        connection-string: ${{ secrets.CONNECTION_STRING }}
+          creds: ${{ secrets.AZURE_CRED }}
 
+    - name: Upload to blob storage
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+            az storage blob upload-batch --account-name joyceresume --auth-mode key -d '$web' -s ./web
+    - name: Purge CDN endpoint
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+           az cdn endpoint purge --content-paths  "/*" --profile-name "heyueresume" --name "joyceheyue" --resource-group "resume_test"
+
+  # Azure logout
+    - name: logout
+      run: |
+            az logout
+      if: always()
