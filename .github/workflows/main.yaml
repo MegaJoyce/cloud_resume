@@ -13,6 +13,14 @@ jobs:
       with:
           creds: ${{ secrets.AZURE_CRED }}
 
+    - uses: azure/CLI@v1
+      with: 
+        inlineScript:
+          az storage container delete $web
+    - uses: azure/CLI@v1
+      with: 
+        inlineScript:
+          az storage container create $web
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
@@ -23,6 +31,7 @@ jobs:
       with:
         inlineScript: |
            az cdn endpoint purge --content-paths  "/*" --profile-name "heyueresume" --name "joyceheyue" --resource-group "resume_test"
+          #  az afd endpoint purge --resource-group resume_test --profile-name heyueresume --endpoint-name joyceheyue --domains www.joyceheyue.fun --content-paths '/*'
 
   # Azure logout
     - name: logout
