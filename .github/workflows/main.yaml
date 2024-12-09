@@ -1,10 +1,6 @@
 name: cloud resume deployment 
 
-on: 
-  push:
-    branches:
-      - main:
-      - '/index.html'
+on: [push]
 
 jobs:
   build:
