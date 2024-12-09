@@ -16,11 +16,11 @@ jobs:
     - uses: azure/CLI@v1
       with: 
         inlineScript:
-          az storage container delete $web
+          az storage container delete --name $web --account-name joyceresume --auth-mode key 
     - uses: azure/CLI@v1
       with: 
         inlineScript:
-          az storage container create $web
+          az storage container create --name $web --account-name joyceresume --auth-mode key 
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
