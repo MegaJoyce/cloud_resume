@@ -13,16 +13,20 @@ jobs:
       with:
           creds: ${{ secrets.AZURE_CRED }}
 
-    - name: Delete the existing container
+    - name: Ensure the $web container is ready
       uses: azure/CLI@v1
-      with: 
-        inlineScript:
-          az storage container delete --name '$web' --account-name joyceresume --auth-mode key 
-    - name: Create a new container
-      uses: azure/CLI@v1
-      with: 
-        inlineScript:
-          az storage container create --name '$web' --account-name joyceresume --auth-mode key 
+      with:
+        inlineScript: |
+          # Check if the $web container exists
+          if az storage container exists --name '$web' --account-name joyceresume --auth-mode key --query 'exists'; then
+            echo "Container exists. Deleting it..."
+            az storage container delete --name '$web' --account-name joyceresume --auth-mode key --yes
+          else
+            echo "Container does not exist. Proceeding to create it..."
+          fi
+          # Create a new container
+          az storage container create --name '$web' --account-name joyceresume --auth-mode key
+    
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
