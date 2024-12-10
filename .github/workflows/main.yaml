@@ -20,7 +20,7 @@ jobs:
           # Check if the $web container exists
           if az storage container exists --name '$web' --account-name joyceresume --auth-mode key --query 'exists'; then
             echo "Container exists. Deleting it..."
-            az storage container delete --name '$web' --account-name joyceresume --auth-mode key --yes
+            az storage container delete --name '$web' --account-name joyceresume --auth-mode key
           else
             echo "Container does not exist. Proceeding to create it..."
           fi
