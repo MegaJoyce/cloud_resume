@@ -17,7 +17,7 @@ jobs:
       uses: azure/CLI@v1
       with: 
         inlineScript:
-          az storage container delete --name '$web' --account-name joyceresume --connection-string ${{ secrets.CONNECTION_STRING }}
+          az storage container delete --name '$web' --account-name joyceresume --auth-mode key 
     - name: Create a new container
       uses: azure/CLI@v1
       with: 
