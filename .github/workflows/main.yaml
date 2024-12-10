@@ -21,6 +21,8 @@ jobs:
           if az storage container exists --name '$web' --account-name joyceresume --auth-mode key --query 'exists'; then
             echo "Container exists. Deleting it..."
             az storage container delete --name '$web' --account-name joyceresume --auth-mode key
+            echo "Waiting for Azure to clean up the container..."
+            sleep 30  # Add a wait time of 20 seconds
           else
             echo "Container does not exist. Proceeding to create it..."
           fi
