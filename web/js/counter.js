@@ -1,3 +1,4 @@
+// counter.js
 window.addEventListener('DOMContentLoaded', (event) => {
     getVisitCount();
   });
@@ -6,17 +7,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const functionApi = 'https://joycefunc.azurewebsites.net/api/hello';
   
   const getVisitCount = () => {
-    let count = 30;
     fetch(functionApi)
       .then(response => {
-        return response.json()
+        return response.text()
       })
       .then(response => {
-        count = response;
-        console.log("Hello, you are visitor number - " + count);
+        const count = parseInt(response);
+        console.log("Hello, you are visitor number " + count);
         document.getElementById('counter').innerText = count;
       }).catch(function (error) {
-        console.log(error);
+        console.log("Failed to fetch visitor count:", error);
       });
     return count;
   }
