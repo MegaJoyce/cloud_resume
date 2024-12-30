@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   getVisitCount();
 });
 
-const functionApi = 'https://joycefunc.azurewebsites.net/api/hello';
+const functionApi = 'https://resumeapi4joyce.azurewebsites.net/api/hello';
 
 const getVisitCount = () => {
   fetch(functionApi)
