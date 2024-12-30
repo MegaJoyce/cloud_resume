@@ -1,5 +1,5 @@
 # Cloud Resume
-This repository hosts Yue's cloud resume project - frontend: HTTP/CSS/JavaScript. 
+This repository hosts Yue's cloud resume project - frontend: HTTP/CSS/JavaScript/DNS/Azure Front Door and CDN. 
 
 Visit my resume website: [Yue He - DevOps Engineer](www.joyceheyue.fun). If it is blank, it means I run out of budget  : (  Sorry.
 
@@ -40,7 +40,7 @@ When I want to deploy the whole project, I will push the IaC repository to remot
 Then I will deploy the Azure Function by pushing it to GitHub and started the workflow. The Function will be deployed as well. This approach allows the function has a flexible code content. 
 
 Finally, I will push the frontend repository, the workflow will automatically copy the web content to Azure storage blob container. And I have configured the Azure FrontDoor so that I could access the website with my own domain name.
-### Why I did not use Azure Pipeline but GitHub Actions instead?
+### Why did I not use Azure Pipeline but GitHub Actions instead?
 They are pretty much the same thing as an automation tool. In Azure official documentation and learning materials, Azure recommends GitHub Actions as an alternative to Azure DevOps. 
 
 And most important to me is that GitHub Actions is FREE! Azure Pipeline requires me to have at least one parallel job to execute the workflow job. I cannot afford it since it costs me quite a lot of budget on other Azure resources. 
